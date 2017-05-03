@@ -1,0 +1,461 @@
+Analysis & Synthesis report for ledpanel
+Wed May 03 21:10:53 2017
+Quartus II 64-Bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. State Machine - |main_led_panel|rs232_rx:u1|state
+  9. State Machine - |main_led_panel|ram:u0|state
+ 10. State Machine - |main_led_panel|ram:u0|ledpanel:LED|state
+ 11. Registers Removed During Synthesis
+ 12. Removed Registers Triggering Further Register Optimizations
+ 13. General Register Statistics
+ 14. Inverted Register Statistics
+ 15. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 16. Parameter Settings for User Entity Instance: Top-level Entity: |main_led_panel
+ 17. Parameter Settings for User Entity Instance: ram:u0|ledpanel:LED
+ 18. Parameter Settings for User Entity Instance: rs232_rx:u1
+ 19. Port Connectivity Checks: "ram:u0|ledpanel:LED"
+ 20. Elapsed Time Per Partition
+ 21. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2013 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++---------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                    ;
++------------------------------------+--------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Wed May 03 21:10:53 2017      ;
+; Quartus II 64-Bit Version          ; 13.1.0 Build 162 10/23/2013 SJ Web Edition ;
+; Revision Name                      ; ledpanel                                   ;
+; Top-level Entity Name              ; main_led_panel                             ;
+; Family                             ; Cyclone III                                ;
+; Total logic elements               ; 611                                        ;
+;     Total combinational functions  ; 594                                        ;
+;     Dedicated logic registers      ; 304                                        ;
+; Total registers                    ; 304                                        ;
+; Total pins                         ; 16                                         ;
+; Total virtual pins                 ; 0                                          ;
+; Total memory bits                  ; 0                                          ;
+; Embedded Multiplier 9-bit elements ; 0                                          ;
+; Total PLLs                         ; 0                                          ;
++------------------------------------+--------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                        ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                                     ; Setting            ; Default Value      ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                                     ; EP3C10E144C8       ;                    ;
+; Top-level entity name                                                      ; main_led_panel     ; ledpanel           ;
+; Family name                                                                ; Cyclone III        ; Cyclone IV GX      ;
+; Use smart compilation                                                      ; Off                ; Off                ;
+; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                                ; Off                ; Off                ;
+; Restructure Multiplexers                                                   ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                                        ; Off                ; Off                ;
+; Preserve fewer node names                                                  ; On                 ; On                 ;
+; Disable OpenCore Plus hardware evaluation                                  ; Off                ; Off                ;
+; Verilog Version                                                            ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                               ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                                   ; Auto               ; Auto               ;
+; Safe State Machine                                                         ; Off                ; Off                ;
+; Extract Verilog State Machines                                             ; On                 ; On                 ;
+; Extract VHDL State Machines                                                ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                          ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                                 ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                             ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                    ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                                  ; On                 ; On                 ;
+; Parallel Synthesis                                                         ; On                 ; On                 ;
+; DSP Block Balancing                                                        ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                                         ; On                 ; On                 ;
+; Power-Up Don't Care                                                        ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                               ; Off                ; Off                ;
+; Remove Duplicate Registers                                                 ; On                 ; On                 ;
+; Ignore CARRY Buffers                                                       ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                                     ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                                      ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                  ; Off                ; Off                ;
+; Ignore LCELL Buffers                                                       ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                        ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                             ; Off                ; Off                ;
+; Optimization Technique                                                     ; Balanced           ; Balanced           ;
+; Carry Chain Length                                                         ; 70                 ; 70                 ;
+; Auto Carry Chains                                                          ; On                 ; On                 ;
+; Auto Open-Drain Pins                                                       ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                      ; Off                ; Off                ;
+; Auto ROM Replacement                                                       ; On                 ; On                 ;
+; Auto RAM Replacement                                                       ; On                 ; On                 ;
+; Auto DSP Block Replacement                                                 ; On                 ; On                 ;
+; Auto Shift Register Replacement                                            ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                            ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                              ; On                 ; On                 ;
+; Strict RAM Replacement                                                     ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                          ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                                     ; Off                ; Off                ;
+; Auto RAM Block Balancing                                                   ; On                 ; On                 ;
+; Auto RAM to Logic Cell Conversion                                          ; Off                ; Off                ;
+; Auto Resource Sharing                                                      ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                              ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                        ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                          ; Off                ; Off                ;
+; Timing-Driven Synthesis                                                    ; On                 ; On                 ;
+; Report Parameter Settings                                                  ; On                 ; On                 ;
+; Report Source Assignments                                                  ; On                 ; On                 ;
+; Report Connectivity Checks                                                 ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                         ; Off                ; Off                ;
+; Synchronization Register Chain Length                                      ; 2                  ; 2                  ;
+; PowerPlay Power Optimization                                               ; Normal compilation ; Normal compilation ;
+; HDL message level                                                          ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                            ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                   ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report                         ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report                  ; 100                ; 100                ;
+; Clock MUX Protection                                                       ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                                ; Off                ; Off                ;
+; Block Design Naming                                                        ; Auto               ; Auto               ;
+; SDC constraint protection                                                  ; Off                ; Off                ;
+; Synthesis Effort                                                           ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal               ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                                       ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                                         ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                                ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                                     ; On                 ; On                 ;
+; Synthesis Seed                                                             ; 1                  ; 1                  ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+
+
+Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
++-------------------------------------+
+; Parallel Compilation                ;
++----------------------------+--------+
+; Processors                 ; Number ;
++----------------------------+--------+
+; Number detected on machine ; 4      ;
+; Maximum allowed            ; 1      ;
++----------------------------+--------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                  ;
++----------------------------------+-----------------+-----------------------+--------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type             ; File Name with Absolute Path                     ; Library ;
++----------------------------------+-----------------+-----------------------+--------------------------------------------------+---------+
+; ram.vhd                          ; yes             ; User VHDL File        ; C:/Users/NUT/Desktop/ledpanel/ram.vhd            ;         ;
+; ledpanel.vhd                     ; yes             ; User VHDL File        ; C:/Users/NUT/Desktop/ledpanel/ledpanel.vhd       ;         ;
+; main_led_panel.vhd               ; yes             ; User VHDL File        ; C:/Users/NUT/Desktop/ledpanel/main_led_panel.vhd ;         ;
+; rs232_rx.vhd                     ; yes             ; Auto-Found VHDL File  ; C:/Users/NUT/Desktop/ledpanel/rs232_rx.vhd       ;         ;
+; edge_detector.vhd                ; yes             ; Auto-Found VHDL File  ; C:/Users/NUT/Desktop/ledpanel/edge_detector.vhd  ;         ;
++----------------------------------+-----------------+-----------------------+--------------------------------------------------+---------+
+
+
++---------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary             ;
++---------------------------------------------+-----------+
+; Resource                                    ; Usage     ;
++---------------------------------------------+-----------+
+; Estimated Total logic elements              ; 611       ;
+;                                             ;           ;
+; Total combinational functions               ; 594       ;
+; Logic element usage by number of LUT inputs ;           ;
+;     -- 4 input functions                    ; 463       ;
+;     -- 3 input functions                    ; 28        ;
+;     -- <=2 input functions                  ; 103       ;
+;                                             ;           ;
+; Logic elements by mode                      ;           ;
+;     -- normal mode                          ; 535       ;
+;     -- arithmetic mode                      ; 59        ;
+;                                             ;           ;
+; Total registers                             ; 304       ;
+;     -- Dedicated logic registers            ; 304       ;
+;     -- I/O registers                        ; 0         ;
+;                                             ;           ;
+; I/O pins                                    ; 16        ;
+; Embedded Multiplier 9-bit elements          ; 0         ;
+; Maximum fan-out node                        ; CLK~input ;
+; Maximum fan-out                             ; 275       ;
+; Total fan-out                               ; 2858      ;
+; Average fan-out                             ; 3.07      ;
++---------------------------------------------+-----------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                         ;
++----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------+--------------+
+; Compilation Hierarchy Node ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                 ; Library Name ;
++----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------+--------------+
+; |main_led_panel            ; 594 (0)           ; 304 (0)      ; 0           ; 0            ; 0       ; 0         ; 16   ; 0            ; |main_led_panel                     ; work         ;
+;    |edge_detector:u3|      ; 1 (1)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |main_led_panel|edge_detector:u3    ; work         ;
+;    |ram:u0|                ; 527 (313)         ; 265 (203)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |main_led_panel|ram:u0              ; work         ;
+;       |ledpanel:LED|       ; 214 (214)         ; 62 (62)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |main_led_panel|ram:u0|ledpanel:LED ; work         ;
+;    |rs232_rx:u1|           ; 66 (66)           ; 37 (37)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |main_led_panel|rs232_rx:u1         ; work         ;
++----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
+Encoding Type:  One-Hot
++------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |main_led_panel|rs232_rx:u1|state                                                                      ;
++-------------------------+-------------------------+--------------------+---------------------+-------------------------+
+; Name                    ; state.wait_for_stop_bit ; state.receive_bits ; state.wait_half_bit ; state.wait_for_rx_start ;
++-------------------------+-------------------------+--------------------+---------------------+-------------------------+
+; state.wait_for_rx_start ; 0                       ; 0                  ; 0                   ; 0                       ;
+; state.wait_half_bit     ; 0                       ; 0                  ; 1                   ; 1                       ;
+; state.receive_bits      ; 0                       ; 1                  ; 0                   ; 1                       ;
+; state.wait_for_stop_bit ; 1                       ; 0                  ; 0                   ; 1                       ;
++-------------------------+-------------------------+--------------------+---------------------+-------------------------+
+
+
+Encoding Type:  One-Hot
++------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |main_led_panel|ram:u0|state                                                                                                         ;
++----------------------+------------------+----------------------+----------------------+----------------------+--------------------+------------------+
+; Name                 ; state.plus_index ; state.receive_pixelB ; state.receive_pixelG ; state.receive_pixelR ; state.address_byte ; state.start_byte ;
++----------------------+------------------+----------------------+----------------------+----------------------+--------------------+------------------+
+; state.start_byte     ; 0                ; 0                    ; 0                    ; 0                    ; 0                  ; 0                ;
+; state.address_byte   ; 0                ; 0                    ; 0                    ; 0                    ; 1                  ; 1                ;
+; state.receive_pixelR ; 0                ; 0                    ; 0                    ; 1                    ; 0                  ; 1                ;
+; state.receive_pixelG ; 0                ; 0                    ; 1                    ; 0                    ; 0                  ; 1                ;
+; state.receive_pixelB ; 0                ; 1                    ; 0                    ; 0                    ; 0                  ; 1                ;
+; state.plus_index     ; 1                ; 0                    ; 0                    ; 0                    ; 0                  ; 1                ;
++----------------------+------------------+----------------------+----------------------+----------------------+--------------------+------------------+
+
+
+Encoding Type:  One-Hot
++-------------------------------------------------------------------------------------------------------------+
+; State Machine - |main_led_panel|ram:u0|ledpanel:LED|state                                                   ;
++----------+----------+----------+----------+----------+----------+----------+----------+----------+----------+
+; Name     ; state.s8 ; state.s7 ; state.s6 ; state.s5 ; state.s4 ; state.s3 ; state.s2 ; state.s1 ; state.s0 ;
++----------+----------+----------+----------+----------+----------+----------+----------+----------+----------+
+; state.s0 ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ;
+; state.s1 ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 1        ; 1        ;
+; state.s2 ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 1        ; 0        ; 1        ;
+; state.s3 ; 0        ; 0        ; 0        ; 0        ; 0        ; 1        ; 0        ; 0        ; 1        ;
+; state.s4 ; 0        ; 0        ; 0        ; 0        ; 1        ; 0        ; 0        ; 0        ; 1        ;
+; state.s5 ; 0        ; 0        ; 0        ; 1        ; 0        ; 0        ; 0        ; 0        ; 1        ;
+; state.s6 ; 0        ; 0        ; 1        ; 0        ; 0        ; 0        ; 0        ; 0        ; 1        ;
+; state.s7 ; 0        ; 1        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 1        ;
+; state.s8 ; 1        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 1        ;
++----------+----------+----------+----------+----------+----------+----------+----------+----------+----------+
+
+
++----------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                     ;
++------------------------------------------+---------------------------------------------+
+; Register name                            ; Reason for Removal                          ;
++------------------------------------------+---------------------------------------------+
+; ram:u0|addr[1..4,13..30]                 ; Stuck at GND due to stuck port data_in      ;
+; ram:u0|addr[11,12,31]                    ; Lost fanout                                 ;
+; ram:u0|state.address_byte                ; Stuck at GND due to stuck port data_in      ;
+; ram:u0|addr[0]                           ; Stuck at VCC due to stuck port clock_enable ;
+; ram:u0|addr[5..10]                       ; Stuck at GND due to stuck port clock_enable ;
+; ram:u0|R[1024..2047]                     ; Stuck at GND due to stuck port clock_enable ;
+; ram:u0|G[1024..2047]                     ; Stuck at GND due to stuck port clock_enable ;
+; ram:u0|B[1024..2047]                     ; Stuck at GND due to stuck port clock_enable ;
+; ram:u0|R[128..1023]                      ; Stuck at GND due to stuck port clock_enable ;
+; ram:u0|G[128..1023]                      ; Stuck at GND due to stuck port clock_enable ;
+; ram:u0|B[128..1023]                      ; Stuck at GND due to stuck port clock_enable ;
+; ram:u0|R[0,65..127]                      ; Stuck at GND due to stuck port clock_enable ;
+; ram:u0|G[0,65..127]                      ; Stuck at GND due to stuck port clock_enable ;
+; ram:u0|B[0,65..127]                      ; Stuck at GND due to stuck port clock_enable ;
+; ram:u0|ledpanel:LED|R0                   ; Stuck at GND due to stuck port data_in      ;
+; ram:u0|ledpanel:LED|G0                   ; Stuck at GND due to stuck port data_in      ;
+; ram:u0|ledpanel:LED|B0                   ; Stuck at GND due to stuck port data_in      ;
+; Total Number of Removed Registers = 5988 ;                                             ;
++------------------------------------------+---------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                                                                    ;
++---------------------------+---------------------------+----------------------------------------------------------------------------------------+
+; Register name             ; Reason for Removal        ; Registers Removed due to This Register                                                 ;
++---------------------------+---------------------------+----------------------------------------------------------------------------------------+
+; ram:u0|addr[1]            ; Stuck at GND              ; ram:u0|R[2047], ram:u0|R[2046], ram:u0|R[2045], ram:u0|R[2044], ram:u0|R[2043],        ;
+;                           ; due to stuck port data_in ; ram:u0|R[2042], ram:u0|R[2041], ram:u0|G[2047], ram:u0|G[2046], ram:u0|G[2045],        ;
+;                           ;                           ; ram:u0|G[2044], ram:u0|G[2043], ram:u0|G[2042], ram:u0|G[2041], ram:u0|B[2047],        ;
+;                           ;                           ; ram:u0|B[2046], ram:u0|B[2045], ram:u0|B[2044], ram:u0|B[2043], ram:u0|B[2042],        ;
+;                           ;                           ; ram:u0|B[2041], ram:u0|ledpanel:LED|R0, ram:u0|ledpanel:LED|G0, ram:u0|ledpanel:LED|B0 ;
+; ram:u0|state.address_byte ; Stuck at GND              ; ram:u0|addr[0], ram:u0|addr[5], ram:u0|addr[6], ram:u0|addr[7], ram:u0|addr[8],        ;
+;                           ; due to stuck port data_in ; ram:u0|addr[9], ram:u0|addr[10]                                                        ;
++---------------------------+---------------------------+----------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 304   ;
+; Number of registers using Synchronous Clear  ; 39    ;
+; Number of registers using Synchronous Load   ; 5     ;
+; Number of registers using Asynchronous Clear ; 0     ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 40    ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++--------------------------------------------------+
+; Inverted Register Statistics                     ;
++----------------------------------------+---------+
+; Inverted Register                      ; Fan out ;
++----------------------------------------+---------+
+; ram:u0|index[2]                        ; 3       ;
+; ram:u0|index[1]                        ; 9       ;
+; ram:u0|index[0]                        ; 9       ;
+; ram:u0|index[4]                        ; 3       ;
+; ram:u0|index[3]                        ; 3       ;
+; ram:u0|index[5]                        ; 3       ;
+; Total number of inverted registers = 6 ;         ;
++----------------------------------------+---------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                 ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                       ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------+
+; 5:1                ; 8 bits    ; 24 LEs        ; 8 LEs                ; 16 LEs                 ; Yes        ; |main_led_panel|rs232_rx:u1|data[5]              ;
+; 5:1                ; 4 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; Yes        ; |main_led_panel|ram:u0|ledpanel:LED|addr[0]      ;
+; 5:1                ; 6 bits    ; 18 LEs        ; 6 LEs                ; 12 LEs                 ; Yes        ; |main_led_panel|ram:u0|ledpanel:LED|col[5]       ;
+; 6:1                ; 3 bits    ; 12 LEs        ; 3 LEs                ; 9 LEs                  ; Yes        ; |main_led_panel|rs232_rx:u1|bit_counter[1]       ;
+; 6:1                ; 13 bits   ; 52 LEs        ; 26 LEs               ; 26 LEs                 ; Yes        ; |main_led_panel|rs232_rx:u1|baudrate_counter[10] ;
+; 8:1                ; 2 bits    ; 10 LEs        ; 6 LEs                ; 4 LEs                  ; No         ; |main_led_panel|rs232_rx:u1|state                ;
+; 7:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; No         ; |main_led_panel|ram:u0|Selector0                 ;
+; 10:1               ; 2 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; No         ; |main_led_panel|rs232_rx:u1|state                ;
+; 1024:1             ; 6 bits    ; 4092 LEs      ; 4092 LEs             ; 0 LEs                  ; No         ; |main_led_panel|ram:u0|ledpanel:LED|Mux389       ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------+
+
+
++--------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Top-level Entity: |main_led_panel ;
++----------------+-------+-------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                  ;
++----------------+-------+-------------------------------------------------------+
+; data_len       ; 2048  ; Signed Integer                                        ;
+; column         ; 64    ; Signed Integer                                        ;
+; addr_port      ; 4     ; Signed Integer                                        ;
++----------------+-------+-------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: ram:u0|ledpanel:LED ;
++----------------+-------+-----------------------------------------+
+; Parameter Name ; Value ; Type                                    ;
++----------------+-------+-----------------------------------------+
+; data_len       ; 2048  ; Signed Integer                          ;
+; column         ; 64    ; Signed Integer                          ;
+; addr_port      ; 4     ; Signed Integer                          ;
++----------------+-------+-----------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------+
+; Parameter Settings for User Entity Instance: rs232_rx:u1 ;
++----------------+----------+------------------------------+
+; Parameter Name ; Value    ; Type                         ;
++----------------+----------+------------------------------+
+; system_speed   ; 50000000 ; Signed Integer               ;
+; baudrate       ; 9600     ; Signed Integer               ;
++----------------+----------+------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------+
+; Port Connectivity Checks: "ram:u0|ledpanel:LED" ;
++-------+-------+----------+----------------------+
+; Port  ; Type  ; Severity ; Details              ;
++-------+-------+----------+----------------------+
+; start ; Input ; Info     ; Stuck at VCC         ;
++-------+-------+----------+----------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:01:05     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus II 64-Bit Analysis & Synthesis
+    Info: Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
+    Info: Processing started: Wed May 03 21:09:43 2017
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off ledpanel -c ledpanel
+Warning (20028): Parallel compilation is not licensed and has been disabled
+Info (12021): Found 2 design units, including 1 entities, in source file ram.vhd
+    Info (12022): Found design unit 1: ram-behave
+    Info (12023): Found entity 1: ram
+Info (12021): Found 2 design units, including 1 entities, in source file ledpanel.vhd
+    Info (12022): Found design unit 1: ledpanel-behave
+    Info (12023): Found entity 1: ledpanel
+Info (12021): Found 2 design units, including 1 entities, in source file main_led_panel.vhd
+    Info (12022): Found design unit 1: main_led_panel-behave
+    Info (12023): Found entity 1: main_led_panel
+Info (12127): Elaborating entity "main_led_panel" for the top level hierarchy
+Info (12128): Elaborating entity "ram" for hierarchy "ram:u0"
+Info (12128): Elaborating entity "ledpanel" for hierarchy "ram:u0|ledpanel:LED"
+Warning (12125): Using design file rs232_rx.vhd, which is not specified as a design file for the current project, but contains definitions for 2 design units and 1 entities in project
+    Info (12022): Found design unit 1: rs232_rx-behave
+    Info (12023): Found entity 1: rs232_rx
+Info (12128): Elaborating entity "rs232_rx" for hierarchy "rs232_rx:u1"
+Warning (12125): Using design file edge_detector.vhd, which is not specified as a design file for the current project, but contains definitions for 2 design units and 1 entities in project
+    Info (12022): Found design unit 1: edge_detector-Behavioral
+    Info (12023): Found entity 1: edge_detector
+Info (12128): Elaborating entity "edge_detector" for hierarchy "edge_detector:u3"
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "R0" is stuck at GND
+    Warning (13410): Pin "G0" is stuck at GND
+    Warning (13410): Pin "B0" is stuck at GND
+Info (286030): Timing-Driven Synthesis is running
+Info (17049): 3 registers lost all their fanouts during netlist optimizations.
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Info (21057): Implemented 628 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 3 input pins
+    Info (21059): Implemented 13 output pins
+    Info (21061): Implemented 612 logic cells
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 7 warnings
+    Info: Peak virtual memory: 703 megabytes
+    Info: Processing ended: Wed May 03 21:10:53 2017
+    Info: Elapsed time: 00:01:10
+    Info: Total CPU time (on all processors): 00:01:08
+
+

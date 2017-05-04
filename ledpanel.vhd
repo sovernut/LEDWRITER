@@ -9,10 +9,10 @@ entity ledpanel is
 				addr_port: integer := 4);
 	port(
 		CLK, START : in std_logic;
-		DATA_R, DATA_G, DATA_B : in  std_logic_vector(data_len-1 downto 0);
+		DATA_R, DATA_G, DATA_B : in  std_logic_vector(127 downto 0);
 		ADDRESS : out std_logic_vector (addr_port-1 downto 0);
 		SCLK , LATCH, BLANK : out std_logic;
-		R0, G0, B0, R1, G1, B1 : out std_logic);
+		R0, G0, B0, R1, G1, B1 ,nexts: out std_logic);
 end ledpanel;
 
 architecture behave of	ledpanel is
@@ -141,13 +141,19 @@ begin
 
 
 
+	reg_r0 <= DATA_R(127 downto 64);
+	reg_r1 <= DATA_R(63 downto 0);
+	reg_g0 <= DATA_G(127 downto 64);
+	reg_g1 <= DATA_G(63 downto 0);
+	reg_b0 <= DATA_B(127 downto 64);
+	reg_b1 <= DATA_B(63 downto 0);
 
-	reg_r0 <= DATA_R((data_len-1)-(addr*column) downto (data_len-column)-(addr*column));
-	reg_r1 <= DATA_R((data_len/2)-1-(addr*column) downto (data_len/2)-column-(addr*column));
-	reg_g0 <= DATA_G((data_len-1)-(addr*column) downto (data_len-column)-(addr*column));
-	reg_g1 <= DATA_G((data_len/2)-1-(addr*column) downto (data_len/2)-column-(addr*column));
-	reg_b0 <= DATA_B((data_len-1)-(addr*column) downto (data_len-column)-(addr*column));
-	reg_b1 <= DATA_B((data_len/2)-1-(addr*column) downto (data_len/2)-column-(addr*column));
+--	reg_r0 <= DATA_R((data_len-1)-(addr*column) downto (data_len-column)-(addr*column));
+--	reg_r1 <= DATA_R((data_len/2)-1-(addr*column) downto (data_len/2)-column-(addr*column));
+--	reg_g0 <= DATA_G((data_len-1)-(addr*column) downto (data_len-column)-(addr*column));
+--	reg_g1 <= DATA_G((data_len/2)-1-(addr*column) downto (data_len/2)-column-(addr*column));
+--	reg_b0 <= DATA_B((data_len-1)-(addr*column) downto (data_len-column)-(addr*column));
+--	reg_b1 <= DATA_B((data_len/2)-1-(addr*column) downto (data_len/2)-column-(addr*column));
 
 --	reg_r0 <= "0000000000000000000000111111111111111111111111111111111111111111";
 --	reg_r1 <= "0000000000000000000000111111111111111111111111111111111111111111";
@@ -183,10 +189,12 @@ begin
 						SCLK <= '0';
 						LATCH <= '0';
 						BLANK <= '0';
+						nexts <= '0';
 					else 
 						delay <= delay+1;
 					end if;
 				when s1 => 
+					nexts <= '0';
 					SCLK <= '0';
 					R0 <= reg_r0(column-1 - col);
 					G0 <= reg_g0(column-1 - col);
@@ -195,17 +203,19 @@ begin
 					G1 <= reg_g1(column-1 - col);
 					B1 <= reg_b1(column-1 - col);
 					--LATCH <= '1';
---					R0 <= '1';
---					G0 <= '1';
+--					R0 <= '0';
+--					G0 <= '0';
 --					B0 <= '1';
---					R1 <= '1';
---					G1 <= '1';
+--					R1 <= '0';
+--					G1 <= '0';
 --					B1 <= '1';
 					state <= s2;
 				when s2 => 
+					nexts <= '0';
 					SCLK <= '1';
 					state <= s3;
 				when s3 =>
+					nexts <= '0';
 					SCLK <= '0';
 					R0 <= '0';
 					G0 <= '0';
@@ -221,15 +231,19 @@ begin
 						state <= s1;
 					end if;
 				when s4 => 
+					nexts <= '0';
 					BLANK <= '1';
 					state <= s5;
 				when s5 =>
+					nexts <= '0';
 					LATCH <= '1';
 					state <= s6;
 				when s6 =>
+					nexts <= '1';
 					LATCH <= '0';
 					state <= s7;
 				when s7 =>
+					nexts <= '0';
 					BLANK <= '0';
 					LATCH <= '0';
 					state <= s8;
@@ -240,6 +254,7 @@ begin
 --						delay <= delay+1;
 --					end if;
 				when s8 =>
+					nexts <= '0';
 					if addr = max_addr then 
 						--state <= s0;
 						addr <= 0;

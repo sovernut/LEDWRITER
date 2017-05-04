@@ -6,7 +6,7 @@ USE ieee.numeric_std.ALL;
 
 entity ram is
 	port(
-			clk, req_rx: in std_logic;
+			clk, RST,req_rx: in std_logic;
 			data : in std_logic_vector(7 downto 0);
 			ADDRESS : out std_logic_vector (3 downto 0);
 			SCLK , LATCH, BLANK : out std_logic;
@@ -18,15 +18,21 @@ end ram;
 		receive_pixelR,receive_pixelG,receive_pixelB,
 		plus_index);
 		signal state : state_type := start_byte;
+		subtype row is std_logic_vector(63 downto 0);
+		type color is array(0 to 31) of row;
+		signal R,G,B : color;
 		--subtype byte is std_logic_vector(2047 downto 0);
-		signal R : std_logic_vector(2047 downto 0);
-		signal G : std_logic_vector(2047 downto 0);
-		signal B : std_logic_vector(2047 downto 0);
+		--signal R,G,B : std_logic_vector(2047 downto 0);
+		signal TR,TG,TB : std_logic_vector(63 downto 0);
+
 		--type mem is array(0 to 2) of byte;
 		--signal ram3x2048: mem;
 		signal index : integer range 0 to 63 := 63;
+		signal indexs : integer range 0 to 15 := 0;
 		signal addr : integer;
-		signal addr_temp : std_logic_vector(7 downto 0);
+		signal addr_temp : std_logic_vector(13 downto 0);
+		signal next_index : std_logic;
+
 	begin
 	
 
@@ -37,9 +43,9 @@ end ram;
 	port map(
 		CLK => CLK,
 		START => '1',
-		DATA_R => R ,
-		DATA_G => G, 
-		DATA_B => B,
+		DATA_R => R(0+indexs)&R(16+indexs),
+		DATA_G => G(0+indexs)&G(16+indexs), 
+		DATA_B => B(0+indexs)&B(16+indexs),
 		ADDRESS => ADDRESS,
 		SCLK => SCLK, 
 		LATCH => LATCH, 
@@ -49,9 +55,15 @@ end ram;
 		B0 => B0,
 		R1 => R1,
 		G1 => G1,
-		B1 => B1);
-
-
+		B1 => B1,
+		nexts => next_index);
+		process(next_index)
+			begin
+				if next_index = '1' then
+					indexs<=indexs+1;
+				end if;
+		end process;
+		
 		process(clk)
 			begin
 				if rising_edge(clk) then
@@ -59,26 +71,27 @@ end ram;
 						when start_byte =>
 							if (req_rx = '1') then
 								if data = x"23" then
-									state <= receive_pixelR;
+									state <= address_byte;
 								end if;
 							end if;
 						when address_byte =>
 							if (req_rx ='1') then
-								addr <=  to_integer(unsigned(data))*32;
+								addr <=  to_integer(unsigned(data));
+								state <= receive_pixelR;
 							end if;
 						when receive_pixelR =>
 							if (req_rx ='1') then
-								R(index+addr) <= data(0);
+								TR(index) <= data(4);
 								state <= receive_pixelG;
 							end if;
 						when receive_pixelG =>
 							if (req_rx ='1') then
-								G(index+addr) <= data(0);
+								TG(index) <= data(4);
 								state <= receive_pixelB;
 							end if;
 						when receive_pixelB =>
 							if (req_rx ='1') then
-								B(index+addr) <= data(0);
+								TB(index) <= data(4);
 								state <= plus_index;
 							end if;
 						when plus_index =>
@@ -86,9 +99,11 @@ end ram;
 								index <= index - 1;
 								state <= receive_pixelR;
 							else
+								R(addr) <= TR;
+								G(addr) <= TG;
+								B(addr) <= TB;
 								index <= 63;
 								state <= start_byte;
-
 							end if;
 					end case;
 				end if;
